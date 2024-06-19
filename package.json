@@ -1,10 +1,15 @@
 {
   "name": "react-formbuilder-lib",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A formbuilder built on react, typescript, sass and uses ant-design to generate a customisable forms from a JSON schema",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,5 +27,39 @@
   "bugs": {
     "url": "https://github.com/debdip-banerjee/react-formbuilder-lib/issues"
   },
-  "homepage": "https://github.com/debdip-banerjee/react-formbuilder-lib#readme"
+  "homepage": "https://github.com/debdip-banerjee/react-formbuilder-lib#readme",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.98",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "antd": "^5.18.0",
+    "dayjs": "^1.11.11",
+    "react-scripts": "5.0.1",
+    "rxjs": "^7.8.1",
+    "sass": "^1.77.4",
+    "web-vitals": "^2.1.4"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "rollup": "^2.79.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/lodash": "^4.17.4",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.36.0"
+  }
 }

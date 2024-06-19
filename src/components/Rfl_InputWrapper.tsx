@@ -94,7 +94,7 @@ const Rfl_InputWrapper: React.FC<InputWrapperProps> = ({fieldObject, fieldname, 
           return (
           <Form.Item 
               id={parent ? (parent + fieldname + childIdx) : fieldname}
-              label={fieldObj.label ? fieldObj.label : fieldname}
+              label={fieldObject.label ? fieldObject.label : fieldname}
               name={childIdx!=null ? [ childIdx ,fieldname ] : _getFormItemName()}
               key={parent ? (parent + fieldname + childIdx) : fieldname}
               rules={Rfl_Utils._getRule(fieldObject)}

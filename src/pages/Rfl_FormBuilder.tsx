@@ -256,17 +256,29 @@ const Rfl_FormBuilder = forwardRef<FormBuilderHandle, IFormBuilderSchema> (( pro
             <br/>
             <div className='rfl_buttonWrapper'>
               <Flex justify={'center'} align={'center'}>
-                <Space >
-                  { currentStep > 0 && <Button type="default" onClick={() => _onPrevious()}>Previous</Button> }
-                  { stepsMeta && (currentStep < stepsMeta?.items.length - 1) && <Button type="primary" onClick={() => _onNext()}>Next</Button> }
-                  { stepsMeta && currentStep === stepsMeta?.items.length - 1 && <Button type="primary" htmlType="submit">{primaryButtonTitle ? primaryButtonTitle : 'Submit'}</Button> }
-                  { stepsMeta && currentStep === stepsMeta?.items.length - 1 && <Button type="default" onClick={_onReset}>Reset</Button>}
-                  {
-                    stepsMeta && currentStep === stepsMeta?.items.length - 1 && extraButtons && extraButtons.map((btn: any, i: number) => (
-                      <Button key={"button-" + i} type="default" onClick={() => _extraBtnClick(btn)}>{btn}</Button>
-                    ))
-                  }
-                </Space>
+                {
+                  (formschema && formschema.stepped) ?
+                  <Space >
+                    { currentStep > 0 && <Button type="default" onClick={() => _onPrevious()}>Previous</Button> }
+                    { stepsMeta && (currentStep < stepsMeta?.items.length - 1) && <Button type="primary" onClick={() => _onNext()}>Next</Button> }
+                    { stepsMeta && currentStep === stepsMeta?.items.length - 1 && <Button type="primary" htmlType="submit">{primaryButtonTitle ? primaryButtonTitle : 'Submit'}</Button> }
+                    {
+                      stepsMeta && currentStep === stepsMeta?.items.length - 1 && extraButtons && extraButtons.map((btn: any, i: number) => (
+                        <Button key={"button-" + i} type="default" onClick={() => _extraBtnClick(btn)}>{btn}</Button>
+                      ))
+                    }
+                  </Space>
+                  :
+                  <Space >
+                    { <Button type="primary" htmlType="submit">{primaryButtonTitle ? primaryButtonTitle : 'Submit'}</Button> }
+                    {/* { <Button type="default" onClick={_onReset}>Reset</Button>} */}
+                    {
+                      extraButtons && extraButtons.map((btn: any, i: number) => (
+                        <Button key={"button-" + i} type="default" onClick={() => _extraBtnClick(btn)}>{btn}</Button>
+                      ))
+                    }
+                  </Space>
+                }
                 
               </Flex>
             </div>

@@ -15,7 +15,7 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
     const _addCategorisedFile = (file: any) => {
       let tmpCat: string = selectedTempCategory as string;
       setFiles((prevCategoryFiles: any) => {
-          let cat = prevCategoryFiles[tmpCat];
+          let cat = prevCategoryFiles ? prevCategoryFiles[tmpCat] : null;
           let updatedCategoryFiles;
 
           if (cat) {
@@ -170,11 +170,11 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
           obj?.extra?.meta?.fields &&
           <DocumentMetaFields obj={obj} onDocMetaSubmit={_onDocMetaSubmit}/>
         }
-        { selectedMetaCategory?.meta?.fields &&
+        { selectedMetaCategory && selectedMetaCategory.meta?.fields &&
           <DocumentMetaFields obj={obj} category={selectedMetaCategory} onDocMetaSubmit={_onDocMetaSubmit}/>
         }
         {
-          Object.keys(files).length > 0 && <UploadedItemCard obj={obj} categoryFiles={files} onItemChange={_onUploadedItemChange}/>
+          files && Object.keys(files).length > 0 && <UploadedItemCard obj={obj} categoryFiles={files} onItemChange={_onUploadedItemChange}/>
         }
         </Space>
       </Card>
