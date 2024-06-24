@@ -53,7 +53,7 @@ const Rfl_InputWrapper: React.FC<InputWrapperProps> = ({fieldObject, fieldname, 
 
     useEffect(() => {
       if (oneOfSections[fieldname]) {
-        setTempSection(oneOfSections[fieldname]);
+        setTempSection((prev: any) => ({...oneOfSections[fieldname]}));
       }
     }, [oneOfSections, fieldname]);
 

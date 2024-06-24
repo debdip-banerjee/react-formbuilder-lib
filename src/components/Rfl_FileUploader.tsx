@@ -14,30 +14,32 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
 
     const _addCategorisedFile = (file: any) => {
       let tmpCat: string = selectedTempCategory as string;
+      let updatedCategoryFiles;
       setFiles((prevCategoryFiles: any) => {
           let cat = prevCategoryFiles ? prevCategoryFiles[tmpCat] : null;
-          let updatedCategoryFiles;
-
           if (cat) {
               cat.files.push(file);
               updatedCategoryFiles = { ...prevCategoryFiles, [tmpCat]: cat };
           } else {
               updatedCategoryFiles = { ...prevCategoryFiles, [tmpCat]: { files: [file] } };
           }
-          onInputChange(updatedCategoryFiles);
           return updatedCategoryFiles;
       });
+      if (updatedCategoryFiles)
+        onInputChange(updatedCategoryFiles);
     }
     const _addUncategorisedFile = (file: any) => {
+      let uncat;
       setFiles((prevUncategorisedFileList: any) => {
-          let uncat = { ...prevUncategorisedFileList };
+          uncat = { ...prevUncategorisedFileList };
           if (!uncat.files) {
               uncat.files = [];
           }
           uncat.files.push(file);
-          onInputChange(uncat);
           return uncat;
       });
+      if (uncat)
+        onInputChange(uncat);
     };
   
     const _collectFiles = (file: any) => {

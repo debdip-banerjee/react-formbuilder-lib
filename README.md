@@ -39,8 +39,8 @@ function App() {
   const _onFormChange = (e: IFieldDataEmitter) => {
     // each field change is captured here on focus out
     console.log(e);
-    if (e.fieldname === 'email' && e.value.length > 5){
-      formBuilderRef.current?.setRflStatus({type: 'success', message: `Email id has ${e.value.length} characters!`} as IMessageAlert);
+    if (e.fieldname === 'email' && e.value.length > 6){
+      formBuilderRef.current?.setRflStatus({type: 'success', message: 'This message can be customised inside formChange method!'} as IMessageAlert);
     }
   }
 
