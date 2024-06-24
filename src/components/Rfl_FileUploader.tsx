@@ -6,7 +6,7 @@ import Rfl_InputWrapper from "./Rfl_InputWrapper";
 import { ICategorisedFiles, IMessageAlert, IUncategorisedFiles } from "../helpers/Rfl_Interfaces";
 
 const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
-    const { dataFormat, _setMessageAlerts, _setNotificationAlerts } = useContext(rfl_formContext);
+    const { dataFormat, _setMessageAlerts } = useContext(rfl_formContext);
     const [files, setFiles] = useState<IUncategorisedFiles | ICategorisedFiles>({});
     const [selectedTempCategory, setCategory] = useState<string | null>(null);
     const [selectedMetaCategory, setMetaCategory] = useState<any>(null);
@@ -18,6 +18,7 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
       setFiles((prevCategoryFiles: any) => {
           let cat = prevCategoryFiles ? prevCategoryFiles[tmpCat] : null;
           if (cat) {
+              if (cat.files.find((f: any) => f.name === file.name)) return;
               cat.files.push(file);
               updatedCategoryFiles = { ...prevCategoryFiles, [tmpCat]: cat };
           } else {
@@ -26,7 +27,7 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
           return updatedCategoryFiles;
       });
       if (updatedCategoryFiles)
-        onInputChange(updatedCategoryFiles);
+      onInputChange(updatedCategoryFiles);
     }
     const _addUncategorisedFile = (file: any) => {
       let uncat;
@@ -35,11 +36,12 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
           if (!uncat.files) {
               uncat.files = [];
           }
+          if (uncat.files.find((f: any) => f.name === file.name)) return;
           uncat.files.push(file);
           return uncat;
       });
       if (uncat)
-        onInputChange(uncat);
+      onInputChange(uncat);
     };
   
     const _collectFiles = (file: any) => {
@@ -140,6 +142,7 @@ const Rfl_FileUploader = ({obj, fieldname, onInputChange}: any) => {
     useEffect(() => {
       setFiles(dataFormat[fieldname]);
     }, [dataFormat])
+
   
     const _uploader = () => {
       return (
